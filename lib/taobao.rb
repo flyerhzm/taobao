@@ -16,6 +16,9 @@ require "taobao/models/seller_cat"
 require "taobao/models/prop_value"
 require "taobao/models/item"
 require "taobao/models/trade"
+require "taobao/models/product"
+require "taobao/models/product_prop_img"
+require "taobao/models/product_img"
 
 module Taobao
 end

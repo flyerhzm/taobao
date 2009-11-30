@@ -5,6 +5,7 @@ require 'pp'
 module Taobao
   class Parse
     DEBUG = true
+
     class MyListener
       include REXML::StreamListener
       attr_accessor :result
@@ -30,20 +31,31 @@ module Taobao
          Taobao::SellerCat,
          Taobao::PropValue,
          Taobao::Item,
-         Taobao::Trade
+         Taobao::Trade,
+         Taobao::Product,
+         Taobao::ProductImg,
+         Taobao::ProductPropImg
         ]
+      end
+
+      def elm_name_to_class_default
+        {
+          "buyer_credit" => Taobao::UserCredit,
+          "seller_credit" => Taobao::UserCredit
+        }
       end
 
       def array_elements
         {
           "SimpleUserInfo-array" => TotalArray,
           "rsp" => TotalArray,
-          "prop_values" => TotalArray
+          "prop_values" => TotalArray,
+          "product_imgs" => TotalArray
         }
       end
 
       def elm_name_to_class(name)
-        @name_to_class ||= (Hash[*(model_classes.collect {|v| [v.elm_name, v]}.flatten)]).merge(array_elements)
+        @name_to_class ||= (Hash[*(model_classes.collect {|v| [v.elm_name, v]}.flatten)]).merge(array_elements).merge(elm_name_to_class_default)
         @name_to_class[name]
       end
 
@@ -123,8 +135,10 @@ module Taobao
       REXML::Document.parse_stream(data, listener)
       listener.result
     rescue Exception => e
-      pp e
-      nil
+      pp e.inspect
+      pp e.backtrace
+      throw e
     end
+
   end
 end

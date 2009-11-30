@@ -5,7 +5,7 @@ require "taobao/parse"
 require 'pp'
 
 class ParseTest < Test::Unit::TestCase
-  context "A User instance" do
+  context "A Parser instance" do
 
     should "should parse the error xml" do
       result = Taobao::Parse.new.process(error_xml)
@@ -85,8 +85,55 @@ class ParseTest < Test::Unit::TestCase
       result = Taobao::Parse.new.process(trades_xml)
       assert_equal result.size, 2
     end
+
+    should "parse taobao.user.get" do
+      result = Taobao::Parse.new.process(taobao_user_get_xml)
+      assert_equal result[0].buyer_credit.level, "0"
+      assert_equal result[0].nick, "nick"
+      assert_equal result[0].location.city, "金华"
+    end
+
+    should "parse taobao.users.get" do
+      result = Taobao::Parse.new.process(taobao_users_get_xml)
+      assert_equal result.size,2
+      assert_equal result[1].buyer_credit.level, "0"
+      assert_equal result[1].nick, "nick"
+      assert_equal result[1].location.city, "金华"
+      assert_equal result[0].buyer_credit.level, "4"
+      assert_equal result[0].nick, "hz0799"
+      assert_equal result[0].location.city, "新界"
+    end
+
+    should "parse taobao.product.get" do
+      result = Taobao::Parse.new.process(taobao_product_get_xml)
+      assert_equal result.size, 1
+      assert_equal result[0].cat_name, "手机"
+      assert_equal result[0].cid, "1512"
+      assert_equal result[0].name, "测试手机"
+      assert_equal result[0].product_id, "1895913"
+      assert_equal result[0].product_imgs.size, 1
+      assert_equal result[0].props, "20000:10552;32222:10555"
+      assert_equal result[0].props_str, "品牌:松下;松下型号:MX7;"
+    end
   end
 
+  def taobao_product_get_xml
+    <<-XML
+    <rsp>
+      <product>
+        <cat_name>手机</cat_name>
+        <cid>1512</cid>
+        <name>测试手机</name>
+        <product_id>1895913</product_id>
+        <product_imgs list="true">
+          <productImg />
+        </product_imgs>
+        <props>20000:10552;32222:10555</props>
+        <props_str>品牌:松下;松下型号:MX7;</props_str>
+      </product>
+    </rsp>
+    XML
+  end
 
   def trades_xml
     <<-XML
@@ -298,6 +345,86 @@ class ParseTest < Test::Unit::TestCase
         <gmtEnd>2007-11-11 00:00:00.0 CST</gmtEnd>
         <ctrlParams>m=1&t=df</ctrlParams>
       </AppSubscControl>
+    XML
+  end
+
+  def taobao_user_get_xml
+    <<-XML
+    <rsp>
+      <user>
+        <buyer_credit>
+          <level>0</level>
+          <score>0</score>
+          <total_num>0</total_num>
+          <good_num>0</good_num>
+        </buyer_credit>
+        <created>2003-10-30 15:46:36</created>
+        <last_visit>1970-01-01 00:00:00</last_visit>
+        <location>
+          <city>金华</city>
+          <state>浙江</state>
+        </location>
+        <nick>nick</nick>
+        <seller_credit>
+          <level>0</level>
+          <score>0</score>
+          <total_num>0</total_num>
+          <good_num>0</good_num>
+        </seller_credit>
+      </user>
+
+    </rsp>
+    XML
+  end
+
+  def taobao_users_get_xml
+    <<-XML
+    <rsp>
+      <user>
+        <buyer_credit>
+          <level>4</level>
+          <score>147</score>
+          <total_num>147</total_num>
+          <good_num>147</good_num>
+        </buyer_credit>
+        <created>2005-02-17 13:19:49</created>
+        <last_visit>2009-11-06 14:39:24</last_visit>
+        <location>
+          <city>新界</city>
+          <state>香港</state>
+        </location>
+        <nick>hz0799</nick>
+        <seller_credit>
+          <level>4</level>
+          <score>146</score>
+          <total_num>156</total_num>
+          <good_num>150</good_num>
+        </seller_credit>
+        <sex>m</sex>
+      </user>
+      <user>
+        <buyer_credit>
+          <level>0</level>
+          <score>0</score>
+          <total_num>0</total_num>
+          <good_num>0</good_num>
+        </buyer_credit>
+        <created>2003-10-30 15:46:36</created>
+        <last_visit>1970-01-01 00:00:00</last_visit>
+        <location>
+          <city>金华</city>
+          <state>浙江</state>
+        </location>
+        <nick>nick</nick>
+        <seller_credit>
+          <level>0</level>
+          <score>0</score>
+          <total_num>0</total_num>
+          <good_num>0</good_num>
+        </seller_credit>
+      </user>
+
+    </rsp>
     XML
   end
 end
