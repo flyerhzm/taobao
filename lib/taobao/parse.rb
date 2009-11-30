@@ -12,6 +12,7 @@ module Taobao
 
       class TotalArray < Array
         attr_accessor :total
+        attr_accessor :totalResults
 
         def push_sym(stack)
         end
@@ -64,6 +65,7 @@ module Taobao
           @attr_names = []
           model_classes.each { |k| @attr_names += k.attr_names }
           @attr_names += [:total]
+          @attr_names += [:totalResults]
         end
         @attr_names.include?(name.to_sym)
       end

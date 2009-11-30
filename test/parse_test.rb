@@ -115,6 +115,40 @@ class ParseTest < Test::Unit::TestCase
       assert_equal result[0].props, "20000:10552;32222:10555"
       assert_equal result[0].props_str, "品牌:松下;松下型号:MX7;"
     end
+
+    should "parse taobao.products.search" do
+      result = Taobao::Parse.new.process(taobao_products_search_xml)
+      assert_equal result.size, 2
+      assert_equal result.totalResults, "17378"
+      assert_equal result[0].cid, "50012028"
+      assert_equal result[0].price, "168.00"
+      assert_equal result[1].name, "嘉士厨13CM保鲜碗"
+    end
+
+  end
+
+  def taobao_products_search_xml
+    <<-XML
+    <rsp>
+      <totalResults>17378</totalResults>
+      <product>
+        <cid>50012028</cid>
+        <name>包邮[w13-626]arishop杂志推荐两穿前系带尖头平跟短筒雪地靴子</name>
+        <price>168.00</price>
+        <product_id>68698103</product_id>
+        <props>20000:6649760;1632501:41643078</props>
+        <tsc>DCRLUC</tsc>
+      </product>
+      <product>
+        <cid>50000567</cid>
+        <name>嘉士厨13CM保鲜碗</name>
+        <price>28.00</price>
+        <product_id>68695959</product_id>
+        <props>20000:40711303;1632501:41642217</props>
+        <tsc>JHTLUC</tsc>
+      </product>
+    </rsp>
+    XML
   end
 
   def taobao_product_get_xml
