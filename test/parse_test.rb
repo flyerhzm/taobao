@@ -134,8 +134,30 @@ class ParseTest < Test::Unit::TestCase
 
     should "process taobao.product.propimg.upload" do
       result = Taobao::Parse.new.process(taobao_product_propimg_upload_xml)
+      assert_equal result.size, 1
+      assert_equal result[0].pic_id, "5980000"
+      assert_equal result[0].url, "http://img05.taobaocdn.com/bao/uploaded/i5/T1WOtoXfJfXXbcaygW_024027.jpg"
+      assert_equal result[0].modified, "2009-11-29 14:41:27"
     end
 
+    should "process taobao.product.update" do
+      result = Taobao::Parse.new.process(taobao_product_update_xml)
+      assert_equal result.size, 1
+      assert_equal result[0].product_id, "65879456"
+      assert_equal result[0].modified, "2009-11-19 14:55:14"
+    end
+
+  end
+
+  def taobao_product_update_xml
+    <<-XML
+    <rsp>
+      <product>
+        <modified>2009-11-19 14:55:14</modified>
+        <product_id>65879456</product_id>
+      </product>
+    </rsp>
+    XML
   end
 
   def taobao_product_propimg_upload_xml
