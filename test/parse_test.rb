@@ -160,6 +160,24 @@ class ParseTest < Test::Unit::TestCase
       assert_equal result[0].pic_id, "5980085"
       assert_equal result[0].product_id, "66744605"
     end
+
+    should "process taobao.product.propimg.delete" do
+      result = Taobao::Parse.new.process(taobao_product_propimg_delete_xml)
+      assert_equal result.size, 1
+      assert_equal result[0].pic_id, "5980085"
+      assert_equal result[0].product_id, "66744605"
+    end
+  end
+
+  def taobao_product_propimg_delete_xml
+    <<-XML
+    <rsp>
+      <ProductPropImg>
+        <pic_id>5980085</pic_id>
+        <product_id>66744605</product_id>
+      </ProductPropImg>
+    </rsp>
+    XML
   end
 
   def taobao_product_img_delete_xml
