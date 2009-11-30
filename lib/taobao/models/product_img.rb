@@ -12,7 +12,8 @@ module Taobao
        :url,
        :position,
        :created,
-       :modified
+       :modified,
+       :product_id
       ]
     end
 

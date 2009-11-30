@@ -147,6 +147,51 @@ class ParseTest < Test::Unit::TestCase
       assert_equal result[0].modified, "2009-11-19 14:55:14"
     end
 
+    should "process taobao.products.get" do
+      result = Taobao::Parse.new.process(taobao_products_get_xml)
+      assert_equal result.size, 2
+      assert_equal result[0].cat_name, "领带夹"
+      assert_equal result[0].cid, "50001248"
+    end
+
+    should "process taobao.product.img.delete" do
+      result = Taobao::Parse.new.process(taobao_product_img_delete_xml)
+      assert_equal result.size, 1
+      assert_equal result[0].pic_id, "5980085"
+      assert_equal result[0].product_id, "66744605"
+    end
+  end
+
+  def taobao_product_img_delete_xml
+    <<-XML
+    <rsp>
+      <productImg>
+        <pic_id>5980085</pic_id>
+        <product_id>66744605</product_id>
+      </productImg>
+    </rsp>
+    XML
+  end
+
+  def taobao_products_get_xml
+    <<-XML
+    <rsp>
+      <product>
+        <cat_name>领带夹</cat_name>
+        <cid>50001248</cid>
+        <product_id>66744605</product_id>
+        <props>20000:81058;1632501:3233251</props>
+        <props_str>品牌:222;货号:123;</props_str>
+      </product>
+      <product>
+        <cat_name>领带夹</cat_name>
+        <cid>50001248</cid>
+        <product_id>66744448</product_id>
+        <props>20000:29527;1632501:3233251</props>
+        <props_str>品牌:Uniqlo/优衣库;货号:123;</props_str>
+      </product>
+    </rsp>
+    XML
   end
 
   def taobao_product_update_xml
