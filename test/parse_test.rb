@@ -193,6 +193,139 @@ class ParseTest < Test::Unit::TestCase
       assert_equal result[0].category_lists[0].category_id, "50010850"
       assert_equal result[0].category_lists[0].count, "12"
     end
+
+    should "process taobao.items.onsale.get" do
+      result = Taobao::Parse.new.process(taobao_items_onsale_get_xml)
+      assert_equal result.totalResults, "2"
+      assert_equal result.size, 2
+      assert_equal result[0].iid, "ab1fed8119ba0ab4b66d92cd6be8915a"
+    end
+
+    should "process taobao.items.inventory.get" do
+      result = Taobao::Parse.new.process(taobao_items_inventory_get_xml)
+      assert_equal result.totalResults, "1"
+      assert_equal result.size, 1
+      assert_equal result[0].iid, "06a1d953a46377d5129cc0ac1308a2ae"
+    end
+
+    should "process taobao.items.all.get" do
+      result = Taobao::Parse.new.process(taobao_items_all_get_xml)
+      assert_equal result.totalResults, "1"
+      assert_equal result.size, 1
+      assert_equal result[0].iid, "06a1d953a46377d5129cc0ac1308a2ae"
+    end
+
+    should "process taobao.item.get" do
+      result = Taobao::Parse.new.process(taobao_item_get_xml)
+      assert_equal result.size, 1
+      assert_equal result[0].iid, "06a1d953a46377d5129cc0ac1308a2ae"
+    end
+
+  end
+
+  def taobao_item_get_xml
+    <<-XML
+    <rsp>
+      <item>
+        <iid>06a1d953a46377d5129cc0ac1308a2ae</iid>
+        <title>链接测试2</title>
+        <nick>hz0799</nick>
+        <type>fixed</type>
+        <cid>50012227</cid>
+        <location>
+          <city>拉萨</city>
+        </location>
+        <price>1000.00</price>
+        <post_fee>0.00</post_fee>
+      </item>
+    </rsp>
+    XML
+  end
+
+  def taobao_items_all_get_xml
+    <<-XML
+    <rsp>
+      <totalResults>1</totalResults>
+      <item>
+        <iid>06a1d953a46377d5129cc0ac1308a2ae</iid>
+        <num_iid>3781986810</num_iid>
+        <title>链接测试2</title>
+        <nick>hz0799</nick>
+        <type>fixed</type>
+        <cid>50012227</cid>
+        <seller_cids>-1</seller_cids>
+        <props>20000:45430;30295:3221642</props>
+        <num>1</num>
+        <valid_thru>7</valid_thru>
+        <price>1000.0</price>
+        <has_discount>true</has_discount>
+        <has_invoice>false</has_invoice>
+        <has_warranty>false</has_warranty>
+        <has_showcase>false</has_showcase>
+        <modified>2009-11-11 13:15:17</modified>
+        <approve_status>other</approve_status>
+        <postage_id>0</postage_id>
+      </item>
+    </rsp>
+    XML
+  end
+
+  def taobao_items_inventory_get_xml
+    <<-XML
+    <rsp>
+      <totalResults>1</totalResults>
+      <item>
+        <iid>06a1d953a46377d5129cc0ac1308a2ae</iid>
+        <title>链接测试2</title>
+        <nick>hz0799</nick>
+        <type>fixed</type>
+        <cid>50012227</cid>
+        <props>20000:45430;30295:3221642</props>
+        <num>1</num>
+        <valid_thru>7</valid_thru>
+        <price>1000.0</price>
+        <approve_status>instock</approve_status>
+      </item>
+    </rsp>
+    XML
+  end
+
+  def taobao_items_onsale_get_xml
+    <<-XML
+    <rsp>
+      <totalResults>2</totalResults>
+      <item>
+        <iid>ab1fed8119ba0ab4b66d92cd6be8915a</iid>
+        <title>【外婆桥正品】仿藤推车 手推车 宽轮手工推车 藤制推车 测试</title>
+        <nick>hz0799</nick>
+        <type>fixed</type>
+        <cid>50010218</cid>
+        <props>20000:8087189;3314686:13202511;3089685:29820073</props>
+        <pic_path>http://img08.taobaocdn.com/bao/uploaded/i8/T1RDdfXo8DXXXR8TUZ_033626.jpg</pic_path>
+        <num>908</num>
+        <valid_thru>7</valid_thru>
+        <list_time>2009-11-13 15:39:47</list_time>
+        <delist_time>2009-11-20 15:39:47</delist_time>
+        <price>50.0</price>
+        <approve_status>onsale</approve_status>
+      </item>
+      <item>
+        <iid>711e4b113b9266e0ffbbea34fc09e1ce</iid>
+        <title>【外婆桥正品】仿藤推车 手推车 宽轮手工推车 藤制推车 测试</title>
+        <nick>hz0799</nick>
+        <type>fixed</type>
+        <cid>50010218</cid>
+        <props>20000:3792546;3089685:90628;3042133:45457</props>
+        <pic_path>http://img08.taobaocdn.com/bao/uploaded/i8/T1RDdfXo8DXXXR8TUZ_033626.jpg</pic_path>
+        <num>908</num>
+        <valid_thru>7</valid_thru>
+        <list_time>2009-11-13 15:40:25</list_time>
+        <delist_time>2009-11-20 15:40:25</delist_time>
+        <price>3560.0</price>
+        <approve_status>onsale</approve_status>
+      </item>
+    </rsp>
+    XML
   end
 
   def taobao_items_search_xml
