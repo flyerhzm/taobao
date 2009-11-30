@@ -29,10 +29,13 @@ module Taobao
          Taobao::Location,
          Taobao::UserCredit,
          Taobao::ItemCat,
+         Taobao::ItemCategory,
          Taobao::ItemProp,
          Taobao::SellerCat,
          Taobao::PropValue,
          Taobao::Item,
+         Taobao::ItemCategory,
+         Taobao::ItemSearch,
          Taobao::Trade,
          Taobao::Product,
          Taobao::ProductImg,
@@ -44,7 +47,8 @@ module Taobao
         {
           "buyer_credit" => Taobao::UserCredit,
           "seller_credit" => Taobao::UserCredit,
-          "ProductPropImg" => Taobao::ProductPropImg
+          "ProductPropImg" => Taobao::ProductPropImg,
+          "item_list" => Taobao::Item
         }
       end
 
@@ -53,7 +57,9 @@ module Taobao
           "SimpleUserInfo-array" => TotalArray,
           "rsp" => TotalArray,
           "prop_values" => TotalArray,
-          "product_imgs" => TotalArray
+          "product_imgs" => TotalArray,
+          "item_lists" => TotalArray,
+          "category_lists" => TotalArray
         }
       end
 

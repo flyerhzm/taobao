@@ -183,6 +183,45 @@ class ParseTest < Test::Unit::TestCase
       assert_equal result[0].type, "fixed"
       assert_equal result[0].cid, "150401"
     end
+
+    should "process taobao.items.search" do
+      result = Taobao::Parse.new.process(taobao_items_search_xml)
+      assert_equal result.totalResults, "1"
+      assert_equal result[0].item_lists.size, 1
+      assert_equal result[0].item_lists[0].iid, "3f9f1794e1100375f3a1e58b64feab73"
+      assert_equal result[0].category_lists.size, 1
+      assert_equal result[0].category_lists[0].category_id, "50010850"
+      assert_equal result[0].category_lists[0].count, "12"
+    end
+  end
+
+  def taobao_items_search_xml
+    <<-XML
+    <rsp>
+      <totalResults>1</totalResults>
+      <itemsearch>
+        <item_lists list="true">
+          <item_list>
+            <iid>3f9f1794e1100375f3a1e58b64feab73</iid>
+            <title>qweqweqweqwe</title>
+            <nick>hz0799</nick>
+            <type>fixed</type>
+            <cid>150401</cid>
+            <delist_time>2009-11-18 19:32:41</delist_time>
+            <location/>
+            <price>31.00</price>
+            <post_fee>0.00</post_fee>
+          </item_list>
+        </item_lists>
+        <category_lists list="true">
+          <category_list>
+            <category_id>50010850</category_id>
+            <count>12</count>
+          </category_list>
+        </category_lists>
+      </itemsearch>
+    </rsp>
+    XML
   end
 
   def taobao_items_get_xml
@@ -434,12 +473,10 @@ class ParseTest < Test::Unit::TestCase
             <prop_value>
               <vid>10027</vid>
               <name>诺基亚</name>
-              <child_pid>10006</child_pid>
             </prop_value>
             <prop_value>
               <vid>10123</vid>
               <name>摩托罗拉</name>
-              <child_pid>10007</child_pid>
             </prop_value>
           </prop_values>
         </item_prop>
