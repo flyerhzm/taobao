@@ -10,7 +10,9 @@ module Taobao
       [
        :pic_id,
        :url,
-       :position
+       :position,
+       :created,
+       :modified
       ]
     end
 

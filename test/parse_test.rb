@@ -34,10 +34,6 @@ class ParseTest < Test::Unit::TestCase
       assert_equal result.ctrlParams, 'm=1&t=df'
     end
 
-    should "should parse return from taobao.users.get" do
-      result = Taobao::Parse.new.process(users_get_xml)
-    end
-
     should "should handle error_rsp" do
       result = Taobao::Parse.new.process(error_rsp_xml)
       assert_equal result.code, "11"
@@ -125,6 +121,30 @@ class ParseTest < Test::Unit::TestCase
       assert_equal result[1].name, "嘉士厨13CM保鲜碗"
     end
 
+    should "process taobao.product.add" do
+      # pending
+    end
+
+    should "process taobao.product.img.upload" do
+      result = Taobao::Parse.new.process(taobao_product_img_upload_xml)
+      assert_equal result.size, 1
+      assert_equal result[0].pic_id, "5980000"
+      assert_equal result[0].url, "http://img05.taobaocdn.com/bao/uploaded/i5/T1WOtoXfJfXXbcaygW_024027.jpg"
+    end
+
+  end
+
+  def taobao_product_img_upload_xml
+    <<-XML
+    <rsp>
+      <productImg>
+        <pic_id>5980000</pic_id>
+        <url>http://img05.taobaocdn.com/bao/uploaded/i5/T1WOtoXfJfXXbcaygW_024027.jpg</url>
+        <modified>2009-11-19 14:41:27</modified>
+        <created>2009-11-19 14:41:27</created>
+      </productImg>
+    </rsp>
+    XML
   end
 
   def taobao_products_search_xml
@@ -315,30 +335,6 @@ class ParseTest < Test::Unit::TestCase
         <code>11</code>
         <msg>error-message</msg>
       </error_rsp>
-    XML
-  end
-
-  def users_get_xml
-    <<-XML
-      <?xml version="1.0" encoding="utf-8" ?>
-      <rsp>
-        <user>
-          <id>3243554</id>
-          <nick>alin</nick>
-          <created>2006-01-04 12:34:56</created>
-          <location>
-            <city>杭州</city>
-          </location>
-        </user>
-        <user>
-          <id>3243554</id>
-          <nick>yy</nick>
-          <created>2006-01-04 12:34:56</created>
-          <location>
-            <city>杭州</city>
-          </location>
-        </user>
-      </rsp>
     XML
   end
 
