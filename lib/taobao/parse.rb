@@ -139,6 +139,10 @@ module Taobao
         end
       end
 
+      def cdata(content)
+        text(content)
+      end
+
     end
 
     def process(data)
