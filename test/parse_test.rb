@@ -132,6 +132,23 @@ class ParseTest < Test::Unit::TestCase
       assert_equal result[0].url, "http://img05.taobaocdn.com/bao/uploaded/i5/T1WOtoXfJfXXbcaygW_024027.jpg"
     end
 
+    should "process taobao.product.propimg.upload" do
+      result = Taobao::Parse.new.process(taobao_product_propimg_upload_xml)
+    end
+
+  end
+
+  def taobao_product_propimg_upload_xml
+    <<-XML
+    <rsp>
+      <ProductPropImg>
+        <pic_id>5980000</pic_id>
+        <url>http://img05.taobaocdn.com/bao/uploaded/i5/T1WOtoXfJfXXbcaygW_024027.jpg</url>
+        <modified>2009-11-29 14:41:27</modified>
+        <created>2009-11-29 14:41:27</created>
+      </ProductPropImg>
+    </rsp>
+    XML
   end
 
   def taobao_product_img_upload_xml

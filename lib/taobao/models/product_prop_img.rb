@@ -11,7 +11,9 @@ module Taobao
        :pic_id,
        :props,
        :url,
-       :position
+       :position,
+       :modified,
+       :created
       ]
     end
 

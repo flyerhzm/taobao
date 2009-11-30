@@ -42,7 +42,8 @@ module Taobao
       def elm_name_to_class_default
         {
           "buyer_credit" => Taobao::UserCredit,
-          "seller_credit" => Taobao::UserCredit
+          "seller_credit" => Taobao::UserCredit,
+          "ProductPropImg" => Taobao::ProductPropImg
         }
       end
 
