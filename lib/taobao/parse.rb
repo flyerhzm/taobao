@@ -39,7 +39,8 @@ module Taobao
          Taobao::Trade,
          Taobao::Product,
          Taobao::ProductImg,
-         Taobao::ProductPropImg
+         Taobao::ProductPropImg,
+         Taobao::TaobaokeItem
         ]
       end
 

@@ -1,18 +1,27 @@
+#
+# http://wiki.open.taobao.com/index.php/TaobaokeItem
+#
+
 require 'taobao/model'
 
 module Taobao
   class TaobaokeItem < Model
     def self.elm_name
-      "location"
+      "taobaokeItem"
     end
 
     def self.attr_names
       [
-       :zip,
-       :address,
-       :city,
-       :state,
-       :country
+       :click_url,
+       :commission,
+       :commission_num,
+       :commission_rate,
+       :commission_volume,
+       :iid,
+       :nick,
+       :pic_url,
+       :price,
+       :title
       ]
     end
 

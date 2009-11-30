@@ -21,6 +21,7 @@ require "taobao/models/trade"
 require "taobao/models/product"
 require "taobao/models/product_prop_img"
 require "taobao/models/product_img"
+require "taobao/models/taobaoke_item"
 
 module Taobao
 end
