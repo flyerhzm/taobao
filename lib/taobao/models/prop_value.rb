@@ -1,3 +1,6 @@
+#
+# http://wiki.open.taobao.com/index.php/PropValue
+#
 require 'taobao/model'
 
 module Taobao
@@ -5,16 +8,21 @@ module Taobao
     def self.elm_name
       "prop_value"
     end
-    
+
     def self.attr_names
       [
-       :vid,
+       :cid,
+       :is_parent,
        :name,
-       :child_pid,
-       :binds
+       :name_alias,
+       :pid,
+       :prop_name,
+       :sort_order,
+       :status,
+       :vid
       ]
     end
-    
+
     for a in attr_names
       attr_accessor a
     end

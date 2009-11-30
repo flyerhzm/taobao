@@ -167,6 +167,75 @@ class ParseTest < Test::Unit::TestCase
       assert_equal result[0].pic_id, "5980085"
       assert_equal result[0].product_id, "66744605"
     end
+
+    should "process taobao.itempropvalues.get" do
+      result = Taobao::Parse.new.process(taobao_itempropvalues_get_xml)
+      assert_equal result.size, 3
+    end
+
+    should "process taobao.items.get" do
+      result = Taobao::Parse.new.process(taobao_items_get_xml)
+      assert_equal result.totalResults, "1"
+      assert_equal result.size, 1
+      assert_equal result[0].iid, "3f9f1794e1100375f3a1e58b64feab73"
+      assert_equal result[0].title, "qweqweqweqwe"
+      assert_equal result[0].nick, "hz0799"
+      assert_equal result[0].type, "fixed"
+      assert_equal result[0].cid, "150401"
+    end
+  end
+
+  def taobao_items_get_xml
+    <<-XML
+    <rsp>
+      <totalResults>1</totalResults>
+      <item>
+        <iid>3f9f1794e1100375f3a1e58b64feab73</iid>
+        <title>qweqweqweqwe</title>
+        <nick>hz0799</nick>
+        <type>fixed</type>
+        <cid>150401</cid>
+        <delist_time>2009-11-18 19:32:41</delist_time>
+        <location/>
+        <price>31.00</price>
+        <post_fee>0.00</post_fee>
+      </item>
+    </rsp>
+    XML
+  end
+  def taobao_itempropvalues_get_xml
+    <<-XML
+    <rsp>
+      <lastModified>2009-09-04 14:46:59</lastModified>
+      <prop_value>
+        <cid>50010527</cid>
+        <pid>20000</pid>
+        <prop_name>品牌</prop_name>
+        <vid>47471</vid>
+        <name>Absorba</name>
+        <status>normal</status>
+        <sort_order>0</sort_order>
+      </prop_value>
+      <prop_value>
+        <cid>50010528</cid>
+        <pid>20000</pid>
+        <prop_name>品牌</prop_name>
+        <vid>45455</vid>
+        <name>Carter's</name>
+        <status>normal</status>
+        <sort_order>0</sort_order>
+      </prop_value>
+      <prop_value>
+        <cid>50010529</cid>
+        <pid>20000</pid>
+        <prop_name>品牌</prop_name>
+        <vid>60353</vid>
+        <name>A-爱儿健</name>
+        <status>normal</status>
+        <sort_order>1</sort_order>
+      </prop_value>
+    </rsp>
+    XML
   end
 
   def taobao_product_propimg_delete_xml
@@ -337,6 +406,7 @@ class ParseTest < Test::Unit::TestCase
       </item_prop>
     XML
   end
+
   def item_props_xml
     <<-XML
       <?xml version="1.0" encoding="utf-8"?>
