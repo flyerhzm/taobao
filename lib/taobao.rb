@@ -22,6 +22,10 @@ require "taobao/models/product"
 require "taobao/models/product_prop_img"
 require "taobao/models/product_img"
 require "taobao/models/taobaoke_item"
+require "taobao/rails/controller"
 
 module Taobao
 end
+
+ActionController::Base.send :include, Taobao::Rails::Controller
+ActionController::Base.helper Taobao::Rails::Controller

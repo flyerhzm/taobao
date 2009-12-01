@@ -4,7 +4,7 @@ require 'open-uri'
 
 module Taobao
   class Service
-    DEBUG = true
+    DEBUG = false
 
     def initialize(method, options={})
       options = options.clone
