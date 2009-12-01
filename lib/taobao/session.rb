@@ -5,16 +5,11 @@ module Taobao
     attr_accessor :session_key
 
     def initialize(params)
-      str = params.sort.collect { |c| c[0] != 'top_sign' ? "#{c[1]}" : ""}.join("") +  ENV['TAOBAO_APP_SECRET']
-      sign = Base64.encode64(Digest::MD5.hexdigest(str).upcase!)
+      self.session_key = params['top_session']
+    end
 
-      self.session_key = params[:top_session]
-
-      # if sign == params[:top_sign]
-      #   self.session_key = params[:top_session]
-      # else
-      #   throw InvalidSignature.new
-      # end
+    def invoke(method, params)
+      Service.new(method, params).invoke
     end
 
     class InvalidSignature < Exception

@@ -9,9 +9,9 @@ class SessionTest < ActiveSupport::TestCase
 
     setup do
       @params = {
-        "top_sign"=>"utdqxA9WSBp7tuRSnFMrOw==",
-        "top_session"=>"1b91f79ea622dc2f738c3152b485584f1",
-        "top_parameters"=>"aWZyYW1lPTEmdHM9MTI1OTYzNDY2MDI0OSZ2aWV3X21vZGU9ZnVsbCZ2aWV3X3dpZHRoPTAmdmlzaXRvcl9pZD0xNzU5NzgyNjkmdmlzaXRvcl9uaWNrPXNhbmRib3hfY18x",
+        "top_sign"=>"9QB/6rEAwejVibFh7SKg4w==",
+        "top_session"=>"11b9860d823d2add3e3643ffb8610563c",
+        "top_parameters"=>"aWZyYW1lPTEmdHM9MTI1OTY1MTUwMzg0OCZ2aWV3X21vZGU9ZnVsbCZ2aWV3X3dpZHRoPTAmdmlzaXRvcl9pZD0xNzU3NTQzNTEmdmlzaXRvcl9uaWNrPWFsaXB1YmxpYzAx",
         "top_appkey"=>"12017774"
       }
     end
