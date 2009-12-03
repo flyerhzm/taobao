@@ -12,7 +12,7 @@ module Taobao
 
       def set_taobao_session
         if params[:top_session]
-
+          session[:taobao_session] = Taobao::Session.new params
         end
       end
 
@@ -21,8 +21,8 @@ module Taobao
       end
 
       module ClassMethods
-        def ensure_taobao_authentication(options = {})
-          before_filter :ensure_taobao_authentication, options
+        def acts_as_taobao_controller(options = {})
+          before_filter :set_taobao_session, options
         end
       end
     end

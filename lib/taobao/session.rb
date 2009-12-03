@@ -9,8 +9,6 @@ module Taobao
       md5 = Digest::MD5.digest(str)
       sign = Base64.encode64(md5).strip
 
-      puts "### #{sign} ### --- ### #{params['top_sign']} ###"
-
       if sign == params['top_sign']
         self.session_key = params['top_session']
       else
