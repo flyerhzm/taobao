@@ -40,6 +40,7 @@ module Taobao
          Taobao::Product,
          Taobao::ProductImg,
          Taobao::ProductPropImg,
+         Taobao::Shop,
          Taobao::TaobaokeItem
         ]
       end

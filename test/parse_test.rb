@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-require 'test_helper'
+require "#{File.dirname(__FILE__)}/test_helper"
 require "taobao/parse"
 
 require 'pp'
@@ -225,6 +225,31 @@ class ParseTest < Test::Unit::TestCase
       result = Taobao::Parse.new.process(taobao_taobaoke_items_get_xml)
     end
 
+    should "process taobao.shop.get" do
+      result = Taobao::Parse.new.process(taobao_shop_get_xml)
+      assert_equal result[0].sid, "33759380"
+      assert_equal result[0].cid, "1041"
+      assert_equal result[0].title, "淘宝测试店铺，千万不要拍"
+      assert_equal result[0].nick, "hz0799"
+      assert_equal result[0].bulletin, "<p>1111是</p>"
+    end
+
+  end
+
+  def taobao_shop_get_xml
+    <<-XML
+    <rsp>
+      <shop>
+        <sid>33759380</sid>
+        <cid>1041</cid>
+        <title>淘宝测试店铺，千万不要拍</title>
+        <nick>hz0799</nick>
+        <bulletin><![CDATA[<p>1111是</p>]]></bulletin>
+        <pic_path>/a9/30/T1aXdXXbtbXXartXjX.gif</pic_path>
+        <modified>2009-11-18 15:33:38</modified>
+      </shop>
+    </rsp>
+    XML
   end
 
   def taobao_taobaoke_items_get_xml
