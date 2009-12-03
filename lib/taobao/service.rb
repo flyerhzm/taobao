@@ -23,13 +23,7 @@ module Taobao
     end
 
     def invoke
-      # print "invoking service at #{ENV['ALISOFT_REST_ENDPOINT']} with #{@params.inspect}\n" if DEBUG
-
       res = Net::HTTP.post_form(URI.parse(ENV['TAOBAO_REST_ENDPOINT']), @params)
-
-      # print "return #{res.inspect} --- #{res.body.inspect}\n" if DEBUG
-
-      Parse.new.process(res.body)
     end
   end
 end

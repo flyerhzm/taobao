@@ -18,6 +18,10 @@ module Taobao
       end
     end
 
+    def invoke(method, params)
+      Parse.new.process(Service.new(method, params).invoke.body)
+    end
+
     class InvalidSignature < Exception
     end
   end
