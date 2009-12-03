@@ -3,6 +3,7 @@ require "taobao/session"
 
 ENV['TAOBAO_APP_KEY'] = '12017774'
 ENV['TAOBAO_APP_SECRET'] = '42ab2d12a5bea25d1bc06ccde9861daf'
+ENV['TAOBAO_REST_ENDPOINT'] = "http://gw.api.tbsandbox.com/router/rest"
 
 class SessionTest < ActiveSupport::TestCase
   context "Initialize the session" do
@@ -28,6 +29,11 @@ class SessionTest < ActiveSupport::TestCase
       assert_equal @session.top_params['iframe'], "1"
       assert_equal @session.top_params['view_mode'], "full"
       assert_equal @session.top_params['ts'], "1259651503848"
+    end
+
+    should "get be able to invoke API" do
+      @session = Taobao::Session.new @params
+      # user = @session.invoke("taobao.user.get", "nick" => @session.top_params['visitor_nick'], 'fields' => "nick,sex,buyer_credit,seller_credit")
     end
   end
 end
