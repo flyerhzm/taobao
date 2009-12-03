@@ -16,10 +16,18 @@ class SessionTest < ActiveSupport::TestCase
       }
     end
 
-    should "get the parameter information from the params hash" do
+    should "get the session_key and top_params from the params hash" do
       assert_nothing_raised do
-        Taobao::Session.new @params
+        @session = Taobao::Session.new @params
       end
+      assert_not_nil @session.session_key
+      assert_not_nil @session.top_params
+      assert_equal @session.top_params['visitor_nick'], "alipublic01"
+      assert_equal @session.top_params['visitor_id'], "175754351"
+      assert_equal @session.top_params['view_width'], "0"
+      assert_equal @session.top_params['iframe'], "1"
+      assert_equal @session.top_params['view_mode'], "full"
+      assert_equal @session.top_params['ts'], "1259651503848"
     end
   end
 end
