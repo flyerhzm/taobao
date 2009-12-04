@@ -16,8 +16,12 @@ module Taobao
         end
       end
 
+      def taobao_auth_url
+        "http://open.taobao.com/isv/authorize.php?appkey=#{ENV['TAOBAO_APP_KEY']}"
+      end
+
       def taobao_auth_link(name)
-        link_to name, "http://open.taobao.com/isv/authorize.php?appkey=#{ENV['TAOBAO_APP_KEY']}"
+        link_to name, taobao_auth_url
       end
 
       module ClassMethods
