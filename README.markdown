@@ -20,16 +20,19 @@ development:
             app_key: 12012322
             app_secret: 42ab2d12a5bea25d1bc06ccd23123121daf
             rest_endpoint: http://gw.api.tbsandbox.com/router/rest
+            auth_url: http://open.taobao.com/isv/authorize.php?appkey=
 
 test:
             app_key: 12012322
             app_secret: 42ab2d12a5bea25d1bc06ccd23123121daf
             rest_endpoint: http://gw.api.tbsandbox.com/router/rest
+            auth_url: http://open.taobao.com/isv/authorize.php?appkey=
 
 production:
             app_key: 12012322
             app_secret: 42ab2d12a5bea25d1bc06ccd23123121daf
-            rest_endpoint: http://gw.api.tbsandbox.com/router/rest
+            rest_endpoint: http://gw.api.taobao.com/router/rest
+            auth_url: http://container.open.taobao.com/container?appkey=
 
 </pre>
 

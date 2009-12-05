@@ -17,7 +17,7 @@ module Taobao
       end
 
       def taobao_auth_url
-        "http://open.taobao.com/isv/authorize.php?appkey=#{ENV['TAOBAO_APP_KEY']}"
+        ENV['TAOBAO_AUTH_URL'] + ENV['TAOBAO_APP_KEY']
       end
 
       def taobao_auth_link(name)
